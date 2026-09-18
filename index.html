@@ -92,20 +92,47 @@
         <span class="hint">Self-directed physics knowledge</span>
       </div>
 
-      <div class="panel" style="padding:1.4rem; margin-bottom:1.5rem;">
-        <div class="meta">Foundations of the Universe</div>
-        <h3 style="font-size:1.5rem; margin:.35rem 0 .5rem;">01. Origins of the Universe</h3>
-        <p style="max-width:78ch; margin:0; color:var(--text-faint);">
-          Explore the Big Bang and the major physical ideas connected to the early universe.
-          This resource is designed as an open knowledge page: jump directly to any section and explore at your own pace.
-        </p>
-        <div class="related-pills" style="margin-top:1rem;">
-          <a class="related-pill" href="#big-bang-resource">🌌 Big Bang</a>
-          <a class="related-pill" href="#inflation-resource">💨 Inflation</a>
-          <a class="related-pill" href="#expansion-resource">🌠 Expansion of Space</a>
-          <a class="related-pill" href="#nucleosynthesis-resource">⚛️ Big Bang Nucleosynthesis</a>
-          <a class="related-pill" href="#cmb-resource">📡 Cosmic Microwave Background</a>
-          <a class="related-pill" href="#dark-energy-resource">🌑 Dark Energy</a>
+      <div class="resource-library" id="resource-library">
+        <button class="resource-folder panel" type="button" data-resource-folder="foundations">
+          <span class="resource-folder-icon">🌌</span>
+          <span class="resource-folder-copy">
+            <span class="meta">Resources</span>
+            <strong>Foundations of the Universe</strong>
+            <span>Explore the fundamental ideas that describe the universe's origin and early evolution.</span>
+          </span>
+          <span class="resource-folder-arrow" aria-hidden="true">›</span>
+        </button>
+
+        <div class="resource-tree" id="foundations-tree" hidden>
+          <div class="resource-tree-head">
+            <div>
+              <span class="meta">Foundations of the Universe</span>
+              <h3>01. Origins of the Universe</h3>
+              <p>Select a concept to render its complete resource. Only one concept is shown at a time.</p>
+            </div>
+            <button class="btn btn-ghost" type="button" data-resource-back="foundations">← Back</button>
+          </div>
+
+          <div class="resource-concepts" role="list" aria-label="Origins of the Universe concepts">
+            <button class="resource-concept-card panel" type="button" data-resource-open="big-bang-resource" role="listitem">
+              <span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Big Bang</strong><small>Hot, dense early universe</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="inflation-resource" role="listitem">
+              <span class="resource-number">02</span><span class="resource-concept-icon">💨</span><span><strong>Cosmic Inflation</strong><small>Early accelerated expansion</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="expansion-resource" role="listitem">
+              <span class="resource-number">03</span><span class="resource-concept-icon">🌠</span><span><strong>Expansion of Space</strong><small>Growing cosmic distances</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="nucleosynthesis-resource" role="listitem">
+              <span class="resource-number">04</span><span class="resource-concept-icon">⚛️</span><span><strong>Big Bang Nucleosynthesis</strong><small>Formation of light nuclei</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="cmb-resource" role="listitem">
+              <span class="resource-number">05</span><span class="resource-concept-icon">📡</span><span><strong>Cosmic Microwave Background</strong><small>Oldest observable light</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="dark-energy-resource" role="listitem">
+              <span class="resource-number">06</span><span class="resource-concept-icon">🌑</span><span><strong>Dark Energy</strong><small>Accelerated cosmic expansion</small></span>
+            </button>
+          </div>
         </div>
       </div>
 
