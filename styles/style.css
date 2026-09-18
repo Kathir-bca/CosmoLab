@@ -1532,7 +1532,6 @@ footer {
 #navlinks {
     gap: .15rem;
     padding: .2rem .05rem .15rem;
-    border-top: 1px solid var(--border);
     scrollbar-width: none;
 }
 
