@@ -302,6 +302,34 @@ main {
     border-radius: var(--radius-m);
 }
 
+/* ============ RESPONSIVE HEADER ============ */
+@media (max-width: 760px) {
+    #topnav {
+        flex-wrap: wrap;
+        gap: .7rem;
+        padding: .75rem .8rem;
+    }
+
+    .brand {
+        flex: 1;
+    }
+
+    #navlinks {
+        order: 3;
+        flex: 0 0 100%;
+        width: 100%;
+        overflow: visible;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .25rem;
+    }
+
+    .navbtn {
+        padding: .45rem .65rem;
+        font-size: .8rem;
+    }
+}
+
 /* ============ HERO ============ */
 #hero {
     position: relative;
