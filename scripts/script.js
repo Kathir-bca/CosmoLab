@@ -398,13 +398,13 @@
 
     /* ============ TIMELINE ============ */
     const TIMELINE = [
-        { t: 'Big Bang', c: 'The universe begins in an extremely hot, dense state roughly 13.8 billion years ago.' },
+        { t: 'Big Bang', c: 'The universe was in an extremely hot, dense state roughly 13.8 billion years ago, and the observable universe has expanded and cooled from that early state.' },
         { t: 'Inflation', c: 'A proposed burst of extremely rapid expansion smooths and flattens the early universe (theoretical).' },
         { t: 'Early universe', c: 'Fundamental particles form; the universe is a hot plasma, opaque to light.' },
-        { t: 'First stars', c: 'Roughly 100–400 million years in, gravity collapses gas clouds into the first stars.' },
+        { t: 'First stars', c: 'Within the first few hundred million years, gravity is thought to have collapsed primordial gas into the first stars.' },
         { t: 'Galaxies', c: 'Stars and gas gather into the first galaxies, which merge and grow over billions of years.' },
         { t: 'Solar systems', c: 'Our Sun and solar system form about 4.6 billion years ago from a collapsing cloud of gas and dust.' },
-        { t: 'Present universe', c: 'Today: a vast, still-expanding universe of roughly two trillion observable galaxies.' },
+        { t: 'Present universe', c: 'Today: a vast, still-expanding observable universe containing a very large number of galaxies; estimates depend on how faint galaxies are counted.' },
         { t: 'Possible future', c: "Depending on dark energy's true nature, current models suggest continued, accelerating expansion (theoretical extrapolation)." }
     ];
 
@@ -537,7 +537,7 @@
     const navlinks = $('#navlinks');
     VIEWS.forEach(function (v) {
         const b = document.createElement('button');
-        b.className = 'navbtn'; b.textContent = v.label; b.setAttribute('role', 'tab');
+        b.className = 'navbtn'; b.textContent = v.label;
         b.addEventListener('click', function () { showView(v.id); });
         b.dataset.view = v.id;
         navlinks.appendChild(b);
@@ -645,6 +645,11 @@
         $all('[data-resource-concept]', $('#view-resources')).forEach(function (el) {
             el.addEventListener('click', function () {
                 const id = el.dataset.resourceConcept;
+                const resource = document.querySelector('[data-resource-key="' + id + '"]');
+                if (resource) {
+                    resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    return;
+                }
                 showView('explore');
                 setTimeout(function () { openConceptModal(id); }, 30);
             });
@@ -837,7 +842,7 @@
             $('#bh-result').innerHTML = fmt(rs / 1000) + ' km';
             if (distMult > 1) {
                 const ratio = Math.sqrt(1 - 1 / distMult);
-                $('#bh-time-note').textContent = 'At ' + fmtPlain(distMult, 3) + '× rₛ, a distant clock ticks ' + fmtPlain(ratio, 4) + ' seconds for every 1 second measured far away — gravitational time dilation.';
+                $('#bh-time-note').textContent = 'At ' + fmtPlain(distMult, 3) + '× rₛ, a local clock accumulates ' + fmtPlain(ratio, 4) + ' seconds for every 1 second of distant-observer coordinate time — gravitational time dilation.';
             } else {
                 $('#bh-time-note').textContent = 'At or inside the event horizon, no static observer can exist — the "time dilation" formula no longer applies.';
             }
