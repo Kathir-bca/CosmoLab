@@ -22,6 +22,7 @@
   <nav id="topnav" aria-label="Primary">
     <div class="brand"><span class="brand-mark" aria-hidden="true"></span>CosmoLab</div>
     <div id="navlinks" role="tablist" aria-label="Sections"></div>
+    <button class="iconbtn nav-menu-btn" id="navMenuBtn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navlinks">☰</button>
     <button class="iconbtn" id="searchBtn" aria-label="Search CosmoLab">⌕</button>
     <button class="iconbtn" id="themeBtn" aria-label="Toggle light and dark theme">◐</button>
   </nav>
@@ -957,12 +958,32 @@
         {id: 'discoveries', label: 'Discoveries'}
       ];
       const navlinks = $('#navlinks');
+      const navMenuBtn = $('#navMenuBtn');
       VIEWS.forEach(function (v) {
         const b = document.createElement('button');
         b.className = 'navbtn'; b.textContent = v.label; b.setAttribute('role', 'tab');
-        b.addEventListener('click', function () {showView(v.id);});
+        b.addEventListener('click', function () {
+          showView(v.id);
+          navlinks.classList.remove('open');
+          navMenuBtn.setAttribute('aria-expanded', 'false');
+          navMenuBtn.setAttribute('aria-label', 'Open navigation menu');
+        });
         b.dataset.view = v.id;
         navlinks.appendChild(b);
+      });
+
+      navMenuBtn.addEventListener('click', function () {
+        const open = navlinks.classList.toggle('open');
+        navMenuBtn.setAttribute('aria-expanded', String(open));
+        navMenuBtn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!navlinks.contains(e.target) && e.target !== navMenuBtn) {
+          navlinks.classList.remove('open');
+          navMenuBtn.setAttribute('aria-expanded', 'false');
+          navMenuBtn.setAttribute('aria-label', 'Open navigation menu');
+        }
       });
 
       const activeLoops = {};
