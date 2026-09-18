@@ -1605,13 +1605,12 @@ footer {
     }
 
     .brand-logo {
-        display: none;
+        width: 122px;
+        height: 36px;
     }
 
     .brand-icon {
-        display: block;
-        width: 34px;
-        height: 34px;
+        display: none;
     }
 
     .iconbtn {
