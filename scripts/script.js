@@ -781,7 +781,7 @@
         const c = document.getElementById('gammaChart');
         const ctx = c.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
-        c.width = c.clientWidth * dpr; c.height = 220 * dpr;
+        c.width = Math.max(1, Math.round(c.clientWidth * dpr)); c.height = 220 * dpr;
         const w = c.width, h = c.height, pad = 28 * dpr;
         ctx.clearRect(0, 0, w, h);
         ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border-strong') || '#444';
@@ -836,7 +836,13 @@
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = canvas.clientWidth * dpr; canvas.height = 360 * dpr;
+        function resizeCanvas() {
+          const currentDpr = window.devicePixelRatio || 1;
+          canvas.width = Math.max(1, Math.round(canvas.clientWidth * currentDpr));
+          canvas.height = 360 * currentDpr;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas, {passive:true});
         const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         function frame() {
             if (currentView !== 'blackhole') { return; }
@@ -1033,7 +1039,13 @@
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         const dpr = window.devicePixelRatio || 1;
-        canvas.width = canvas.clientWidth * dpr; canvas.height = 300 * dpr;
+        function resizeCanvas() {
+          const currentDpr = window.devicePixelRatio || 1;
+          canvas.width = Math.max(1, Math.round(canvas.clientWidth * currentDpr));
+          canvas.height = 300 * currentDpr;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas, {passive:true});
         const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         function frame() {
             if (currentView !== 'cosmology') { return; }
