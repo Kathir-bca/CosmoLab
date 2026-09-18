@@ -638,20 +638,68 @@
 
 
     function initResources() {
-        $all('[data-nav]', $('#view-resources')).forEach(function (b) {
-            b.addEventListener('click', function () { showView(b.dataset.nav); });
+        const view = $('#view-resources');
+        const folder = $('[data-resource-folder="foundations"]', view);
+        const tree = $('#foundations-tree');
+
+        function closeAllResources() {
+            $all('.resource-article', view).forEach(function (article) {
+                article.classList.remove('resource-visible');
+                article.setAttribute('hidden', '');
+            });
+        }
+
+        function openResource(resourceId) {
+            const resource = document.getElementById(resourceId);
+            if (!resource) return;
+            closeAllResources();
+            resource.removeAttribute('hidden');
+            resource.classList.add('resource-visible');
+            setTimeout(function () {
+                resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 30);
+            history.replaceState(null, '', '#' + resourceId);
+        }
+
+        if (folder && tree) {
+            folder.addEventListener('click', function () {
+                const expanded = !tree.hasAttribute('hidden');
+                tree.toggleAttribute('hidden', expanded);
+                folder.setAttribute('aria-expanded', String(!expanded));
+                folder.classList.toggle('is-open', !expanded);
+                if (!expanded) closeAllResources();
+            });
+            folder.setAttribute('aria-expanded', 'false');
+        }
+
+        $all('[data-resource-back="foundations"]', view).forEach(function (button) {
+            button.addEventListener('click', function () {
+                closeAllResources();
+                tree.setAttribute('hidden', '');
+                folder.classList.remove('is-open');
+                folder.setAttribute('aria-expanded', 'false');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         });
 
-        $all('[data-resource-concept]', $('#view-resources')).forEach(function (el) {
+        $all('[data-resource-open]', view).forEach(function (button) {
+            button.addEventListener('click', function () {
+                openResource(button.dataset.resourceOpen);
+            });
+        });
+
+        $all('[data-resource-concept]', view).forEach(function (el) {
             el.addEventListener('click', function (event) {
                 event.preventDefault();
                 const id = el.dataset.resourceConcept;
                 const resource = document.querySelector('[data-resource-key="' + id + '"]');
                 if (resource) {
-                    showView('resources');
-                    setTimeout(function () {
-                        resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 30);
+                    if (tree.hasAttribute('hidden')) {
+                        tree.removeAttribute('hidden');
+                        folder.classList.add('is-open');
+                        folder.setAttribute('aria-expanded', 'true');
+                    }
+                    openResource(resource.id);
                     return;
                 }
                 showView('explore');
@@ -659,23 +707,23 @@
             });
         });
 
-        // Resource cards/links can be clicked from any view. If the target is
-        // inside Resources, switch to that view before scrolling to it.
-        $all('a[href^="#"][href$="-resource"]').forEach(function (el) {
+        $all('a[href^="#"][href$="-resource"]', view).forEach(function (el) {
             el.addEventListener('click', function (event) {
                 const targetId = el.getAttribute('href').slice(1);
                 const target = document.getElementById(targetId);
                 if (!target) return;
                 event.preventDefault();
-                showView('resources');
-                setTimeout(function () {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    history.replaceState(null, '', '#' + targetId);
-                }, 30);
+                if (tree.hasAttribute('hidden')) {
+                    tree.removeAttribute('hidden');
+                    folder.classList.add('is-open');
+                    folder.setAttribute('aria-expanded', 'true');
+                }
+                openResource(targetId);
             });
         });
-    }
 
+        closeAllResources();
+    }
     /* ============ STARFIELD (home hero) ============ */
     function drawStarfield() {
         const canvas = document.getElementById('starfield');
