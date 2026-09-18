@@ -1119,3 +1119,200 @@ footer {
     border: 1px solid var(--border-strong);
     flex: none;
 }
+
+/* ============ RESPONSIVE LABS & MOBILE POLISH ============ */
+
+/* Prevent grid/flex children from forcing horizontal overflow. */
+main,
+.view,
+.lab-grid,
+.grid2,
+.grid3,
+.spotlight-grid,
+.panel,
+.lab-panel,
+.section-head {
+    min-width: 0;
+}
+
+img,
+svg,
+canvas {
+    max-width: 100%;
+}
+
+@media (max-width: 860px) {
+    .lab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lab-panel {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+    }
+
+    #topnav {
+        padding-left: .85rem;
+        padding-right: .85rem;
+    }
+
+    .section-head {
+        margin-top: 2.4rem;
+        align-items: flex-start;
+        gap: .45rem .8rem;
+    }
+
+    .section-head h2 {
+        font-size: 1.35rem;
+    }
+
+    .section-head .hint {
+        width: 100%;
+        line-height: 1.4;
+    }
+
+    .lab-panel {
+        padding: 1.1rem;
+    }
+
+    .formula {
+        font-size: 1.12rem;
+        padding: .85rem 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .field label {
+        gap: .7rem;
+        flex-wrap: wrap;
+    }
+
+    .result-box .r-val {
+        overflow-wrap: anywhere;
+    }
+
+    .timeline {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        padding: 1.1rem .1rem 1.25rem;
+    }
+
+    .tl-node {
+        width: 135px;
+        padding-right: 1rem;
+    }
+
+    .tl-caption {
+        font-size: .84rem;
+    }
+
+    #view-blackhole .panel[style*="padding:1rem"] {
+        overflow: hidden;
+    }
+
+    #knowledgeGraph {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .spectrum-labels {
+        gap: .4rem;
+        flex-wrap: wrap;
+        line-height: 1.35;
+    }
+
+    .btn {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero-inner {
+        padding: 1.5rem 1rem 1.8rem;
+    }
+
+    .hero-copy p {
+        font-size: .95rem;
+    }
+
+    .hero-cta {
+        align-items: stretch;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lab-panel {
+        padding: .9rem;
+        border-radius: var(--radius-s);
+    }
+
+    .lab-panel h3 {
+        font-size: 1rem;
+    }
+
+    .result-box {
+        padding: .85rem .9rem;
+    }
+
+    .result-box .r-val {
+        font-size: 1.25rem;
+    }
+
+    .steps {
+        font-size: .8rem;
+        overflow-wrap: anywhere;
+    }
+
+    .note {
+        overflow-wrap: anywhere;
+    }
+
+    #view-cosmology .timeline {
+        margin-right: -.1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    #topnav {
+        column-gap: .45rem;
+    }
+
+    .brand {
+        font-size: .98rem;
+    }
+
+    .brand-mark {
+        width: 23px;
+        height: 23px;
+    }
+
+    .iconbtn {
+        width: 34px;
+        height: 34px;
+    }
+
+    main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+    }
+
+    .lab-panel {
+        padding: .8rem;
+    }
+
+    .tl-node {
+        width: 125px;
+    }
+}
