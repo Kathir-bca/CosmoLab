@@ -1630,3 +1630,58 @@ footer {
     }
 }
 
+
+
+/* ============ RESOURCE SYSTEM ============ */
+.resource-article {
+    padding: clamp(1.2rem, 3vw, 2.4rem);
+    scroll-margin-top: 1.5rem;
+}
+
+.resource-title {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin: .8rem 0 .6rem;
+}
+
+.resource-card {
+    padding: 1rem;
+}
+
+.resource-card + .resource-card {
+    margin-top: .8rem;
+}
+
+.resource-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius-m);
+    background: var(--bg-3);
+}
+
+.resource-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.resource-section {
+    margin: 2rem 0;
+}
+
+.resource-section:first-child {
+    margin-top: 0;
+}
+
+@media (max-width: 600px) {
+    .resource-article {
+        padding: 1rem;
+    }
+
+    .resource-title {
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+    }
+}
