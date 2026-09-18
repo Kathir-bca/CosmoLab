@@ -522,6 +522,7 @@
     /* ============ NAV ============ */
     const VIEWS = [
         { id: 'home', label: 'Home' },
+        { id: 'resources', label: 'Resources' },
         { id: 'explore', label: 'Explore' },
         { id: 'relativity', label: 'Relativity Lab' },
         { id: 'blackhole', label: 'Black Hole Lab' },
@@ -572,6 +573,7 @@
     /* ============ INIT DISPATCH ============ */
     function initView(id) {
         if (id === 'home') initHome();
+        if (id === 'resources') initResources();
         if (id === 'explore') initExplore();
         if (id === 'relativity') initRelativity();
         if (id === 'blackhole') initBlackHole();
@@ -632,6 +634,21 @@
 
     function bindConceptCard(el) {
         el.addEventListener('click', function () { openConceptModal(el.dataset.concept); });
+    }
+
+
+    function initResources() {
+        $all('[data-nav]', $('#view-resources')).forEach(function (b) {
+            b.addEventListener('click', function () { showView(b.dataset.nav); });
+        });
+
+        $all('[data-resource-concept]', $('#view-resources')).forEach(function (el) {
+            el.addEventListener('click', function () {
+                const id = el.dataset.resourceConcept;
+                showView('explore');
+                setTimeout(function () { openConceptModal(id); }, 30);
+            });
+        });
     }
 
     /* ============ STARFIELD (home hero) ============ */
