@@ -169,16 +169,23 @@ button {
     position: sticky;
     top: 0;
     z-index: 50;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "brand search theme"
+        "nav   nav    nav";
     align-items: center;
-    gap: 1.2rem;
-    padding: .85rem 1.2rem;
+    column-gap: .7rem;
+    row-gap: .55rem;
+    padding: .75rem 1.2rem .6rem;
     background: color-mix(in srgb, var(--bg) 82%, transparent);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
 }
 
 .brand {
+    grid-area: brand;
     display: flex;
     align-items: center;
     gap: .55rem;
@@ -197,12 +204,16 @@ button {
 }
 
 #navlinks {
+    grid-area: nav;
     display: flex;
     gap: .2rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    flex: 1;
+    width: 100%;
     min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    white-space: nowrap;
+    padding-bottom: .1rem;
 }
 
 #navlinks::-webkit-scrollbar {
@@ -249,6 +260,14 @@ button {
 
 .iconbtn:hover {
     background: var(--panel-strong);
+}
+
+#searchBtn {
+    grid-area: search;
+}
+
+#themeBtn {
+    grid-area: theme;
 }
 
 main {
@@ -1099,4 +1118,387 @@ footer {
     border-radius: 8px;
     border: 1px solid var(--border-strong);
     flex: none;
+}
+
+/* ============ RESPONSIVE LABS & MOBILE POLISH ============ */
+
+/* Prevent grid/flex children from forcing horizontal overflow. */
+main,
+.view,
+.lab-grid,
+.grid2,
+.grid3,
+.spotlight-grid,
+.panel,
+.lab-panel,
+.section-head {
+    min-width: 0;
+}
+
+img,
+svg,
+canvas {
+    max-width: 100%;
+}
+
+@media (max-width: 860px) {
+    .lab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lab-panel {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+    }
+
+    #topnav {
+        padding-left: .85rem;
+        padding-right: .85rem;
+    }
+
+    .section-head {
+        margin-top: 2.4rem;
+        align-items: flex-start;
+        gap: .45rem .8rem;
+    }
+
+    .section-head h2 {
+        font-size: 1.35rem;
+    }
+
+    .section-head .hint {
+        width: 100%;
+        line-height: 1.4;
+    }
+
+    .lab-panel {
+        padding: 1.1rem;
+    }
+
+    .formula {
+        font-size: 1.12rem;
+        padding: .85rem 1rem;
+        overflow-wrap: anywhere;
+    }
+
+    .field label {
+        gap: .7rem;
+        flex-wrap: wrap;
+    }
+
+    .result-box .r-val {
+        overflow-wrap: anywhere;
+    }
+
+    .timeline {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        padding: 1.1rem .1rem 1.25rem;
+    }
+
+    .tl-node {
+        width: 135px;
+        padding-right: 1rem;
+    }
+
+    .tl-caption {
+        font-size: .84rem;
+    }
+
+    #view-blackhole .panel[style*="padding:1rem"] {
+        overflow: hidden;
+    }
+
+    #knowledgeGraph {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .spectrum-labels {
+        gap: .4rem;
+        flex-wrap: wrap;
+        line-height: 1.35;
+    }
+
+    .btn {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .hero-inner {
+        padding: 1.5rem 1rem 1.8rem;
+    }
+
+    .hero-copy p {
+        font-size: .95rem;
+    }
+
+    .hero-cta {
+        align-items: stretch;
+    }
+
+    .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .lab-panel {
+        padding: .9rem;
+        border-radius: var(--radius-s);
+    }
+
+    .lab-panel h3 {
+        font-size: 1rem;
+    }
+
+    .result-box {
+        padding: .85rem .9rem;
+    }
+
+    .result-box .r-val {
+        font-size: 1.25rem;
+    }
+
+    .steps {
+        font-size: .8rem;
+        overflow-wrap: anywhere;
+    }
+
+    .note {
+        overflow-wrap: anywhere;
+    }
+
+    #view-cosmology .timeline {
+        margin-right: -.1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    #topnav {
+        column-gap: .45rem;
+    }
+
+    .brand {
+        font-size: .98rem;
+    }
+
+    .brand-mark {
+        width: 23px;
+        height: 23px;
+    }
+
+    .iconbtn {
+        width: 34px;
+        height: 34px;
+    }
+
+    main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+    }
+
+    .lab-panel {
+        padding: .8rem;
+    }
+
+    .tl-node {
+        width: 125px;
+    }
+}
+
+
+/* ============ PHONE RESPONSIVE OVERRIDES ============ */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+#topnav,
+main,
+footer {
+    width: 100%;
+    max-width: 100%;
+}
+
+#navlinks {
+    min-width: 0;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+}
+
+.panel,
+.card,
+.term-card,
+.discovery,
+.path {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (max-width: 600px) {
+    #topnav {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        column-gap: .5rem;
+        padding: .65rem .75rem .55rem;
+    }
+
+    .brand {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #navlinks {
+        gap: .1rem;
+        margin: 0 -.2rem;
+        padding: .05rem .2rem .15rem;
+    }
+
+    .navbtn {
+        padding: .45rem .62rem;
+        font-size: .78rem;
+    }
+
+    main {
+        padding: 0 .75rem 3.5rem;
+    }
+
+    .section-head {
+        margin: 2rem 0 1rem;
+    }
+
+    .section-head h2 {
+        font-size: 1.25rem;
+    }
+
+    .section-head .hint {
+        font-size: .78rem;
+    }
+
+    .hero-inner {
+        display: block;
+        padding: 1.25rem .9rem 1.5rem;
+    }
+
+    .hero-copy p {
+        font-size: .9rem;
+    }
+
+    .hero-stats {
+        margin-top: 1.2rem;
+    }
+
+    .lab-panel {
+        padding: .85rem;
+        overflow: hidden;
+    }
+
+    .lab-panel h3 {
+        line-height: 1.25;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: auto;
+        min-height: 180px;
+        max-height: 300px;
+    }
+
+    #expansionCanvas {
+        aspect-ratio: 16 / 9;
+    }
+
+    #slitCanvas {
+        aspect-ratio: 16 / 9;
+    }
+
+    .formula {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .field label {
+        align-items: flex-start;
+    }
+
+    .field label .val {
+        margin-left: auto;
+    }
+
+    input[type="number"] {
+        min-width: 0;
+    }
+
+    .result-box .r-val {
+        font-size: 1.2rem;
+        word-break: break-word;
+    }
+
+    .timeline {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1rem 0 1.15rem;
+    }
+
+    .tl-node {
+        width: 122px;
+        padding-right: .85rem;
+    }
+
+    .spectrum-labels {
+        font-size: .62rem;
+    }
+
+    footer {
+        padding-left: .75rem;
+        padding-right: .75rem;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 380px) {
+    #topnav {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+    }
+
+    .brand {
+        font-size: .92rem;
+    }
+
+    .iconbtn {
+        width: 32px;
+        height: 32px;
+        font-size: .9rem;
+    }
+
+    .navbtn {
+        font-size: .74rem;
+        padding-left: .55rem;
+        padding-right: .55rem;
+    }
+
+    main {
+        padding-left: .6rem;
+        padding-right: .6rem;
+    }
+
+    .lab-panel {
+        padding: .75rem;
+    }
 }
