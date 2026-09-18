@@ -201,13 +201,6 @@ button {
     object-position: left center;
 }
 
-.brand-icon {
-    display: none;
-    width: 34px;
-    height: 34px;
-    object-fit: contain;
-}
-
 #navlinks {
     grid-area: nav;
     display: flex;
@@ -1324,8 +1317,7 @@ canvas {
 
 
 /* ============ COSMOLAB BRAND ASSETS ============ */
-.brand-logo,
-.brand-icon {
+.brand-logo {
     flex: none;
 }
 
@@ -1636,13 +1628,8 @@ footer {
     }
 
     .brand-logo {
-        display: none;
-    }
-
-    .brand-icon {
-        display: block;
-        width: 34px;
-        height: 34px;
+        width: 132px;
+        height: 36px;
     }
 
     .iconbtn {
