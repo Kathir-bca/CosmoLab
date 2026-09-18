@@ -534,16 +534,56 @@ main {
 }
 
 .resource-folder {
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.35rem 1.5rem;
-    text-align: left;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    padding: 1.35rem 1.5rem !important;
+    text-align: left !important;
     cursor: pointer;
-    color: var(--text);
+    color: var(--text) !important;
+    background: var(--panel) !important;
     transition: border-color .15s, transform .15s, background .15s;
+}
+
+.resource-folder > .resource-folder-icon {
+    display: grid !important;
+    place-items: center !important;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.8rem;
+}
+
+.resource-folder > .resource-folder-copy {
+    min-width: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: .18rem !important;
+    line-height: 1.35;
+}
+
+.resource-folder > .resource-folder-copy .meta {
+    display: block !important;
+    margin: 0 !important;
+}
+
+.resource-folder > .resource-folder-copy strong {
+    display: block !important;
+    color: var(--text) !important;
+    font-size: 1.15rem;
+}
+
+.resource-folder > .resource-folder-copy span:last-child {
+    display: block !important;
+    color: var(--text-faint) !important;
+    font-size: .86rem;
+}
+
+.resource-folder > .resource-folder-arrow {
+    display: block !important;
+    flex: none;
 }
 
 .resource-folder:hover,
