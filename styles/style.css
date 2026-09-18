@@ -188,19 +188,24 @@ button {
     grid-area: brand;
     display: flex;
     align-items: center;
-    gap: .55rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.05rem;
-    white-space: nowrap;
+    width: fit-content;
+    min-width: 0;
+    text-decoration: none;
 }
 
-.brand-mark {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 32% 30%, var(--gold), var(--violet) 55%, var(--blue) 100%);
-    flex: none;
+.brand-logo {
+    display: block;
+    width: 164px;
+    height: 48px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.brand-icon {
+    display: none;
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
 }
 
 #navlinks {
@@ -1317,6 +1322,31 @@ canvas {
     }
 }
 
+
+/* ============ COSMOLAB BRAND ASSETS ============ */
+.brand-logo,
+.brand-icon {
+    flex: none;
+}
+
+@media (max-width: 600px) {
+    .brand-logo {
+        width: 132px;
+        height: 42px;
+    }
+}
+
+@media (max-width: 380px) {
+    .brand-logo {
+        display: none;
+    }
+
+    .brand-icon {
+        display: block;
+        width: 34px;
+        height: 34px;
+    }
+}
 
 /* ============ PHONE RESPONSIVE OVERRIDES ============ */
 html, body {
