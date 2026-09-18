@@ -195,7 +195,7 @@
             id: 'big-bang', title: 'The Big Bang', category: 'cosmo', diff: 'beginner', status: 'established',
             simple: 'The universe began in an extremely hot, dense state roughly 13.8 billion years ago and has been expanding and cooling ever since.',
             intermediate: "This isn't an explosion happening inside pre-existing space — it describes space itself expanding from that dense early state, evidenced by the cosmic microwave background, the abundance of light elements, and the redshift of distant galaxies.",
-            advanced: 'The model describes the universe\'s evolution from a fraction of a second after the initial singularity onward; the singularity itself marks where known physics breaks down, not a fully understood event.',
+            advanced: 'The model describes the universe\'s evolution back to extremely early conditions; an extrapolated singularity is where classical general relativity ceases to provide a complete physical description, so it should not be treated as an established literal event.',
             formula: null,
             related: ['cmb', 'cosmic-inflation', 'expansion']
         },
