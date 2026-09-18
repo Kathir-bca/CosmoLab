@@ -209,10 +209,6 @@ button {
     display: none;
 }
 
-.nav-menu-btn {
-    display: none;
-}
-
 .navbtn {
     flex: none;
     border: none;
@@ -1103,77 +1099,4 @@ footer {
     border-radius: 8px;
     border: 1px solid var(--border-strong);
     flex: none;
-}
-@media (max-width: 700px) {
-    #topnav {
-        gap: .55rem;
-        padding: .7rem .75rem;
-    }
-
-    .brand {
-        margin-right: auto;
-    }
-
-    .brand-mark {
-        width: 24px;
-        height: 24px;
-    }
-
-    .nav-menu-btn {
-        display: flex;
-    }
-
-    #navlinks {
-        position: absolute;
-        top: calc(100% + 1px);
-        left: .65rem;
-        right: .65rem;
-        display: none;
-        flex-direction: column;
-        gap: .25rem;
-        padding: .55rem;
-        background: color-mix(in srgb, var(--bg-2) 96%, transparent);
-        border: 1px solid var(--border-strong);
-        border-radius: var(--radius-m);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, .28);
-        backdrop-filter: blur(18px);
-        max-height: min(70vh, 520px);
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    #navlinks.open {
-        display: flex;
-    }
-
-    .navbtn {
-        width: 100%;
-        text-align: left;
-        padding: .7rem .85rem;
-        border-radius: 10px;
-        font-size: .9rem;
-    }
-
-    .navbtn[aria-current="page"] {
-        background: var(--blue-soft);
-    }
-
-    .iconbtn {
-        width: 34px;
-        height: 34px;
-    }
-}
-
-@media (max-width: 420px) {
-    .brand {
-        font-size: .98rem;
-    }
-
-    .nav-menu-btn,
-    #searchBtn,
-    #themeBtn {
-        width: 32px;
-        height: 32px;
-        font-size: .9rem;
-    }
 }
