@@ -643,15 +643,35 @@
         });
 
         $all('[data-resource-concept]', $('#view-resources')).forEach(function (el) {
-            el.addEventListener('click', function () {
+            el.addEventListener('click', function (event) {
+                event.preventDefault();
                 const id = el.dataset.resourceConcept;
                 const resource = document.querySelector('[data-resource-key="' + id + '"]');
                 if (resource) {
-                    resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    showView('resources');
+                    setTimeout(function () {
+                        resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 30);
                     return;
                 }
                 showView('explore');
                 setTimeout(function () { openConceptModal(id); }, 30);
+            });
+        });
+
+        // Resource cards/links can be clicked from any view. If the target is
+        // inside Resources, switch to that view before scrolling to it.
+        $all('a[href^="#"][href$="-resource"]').forEach(function (el) {
+            el.addEventListener('click', function (event) {
+                const targetId = el.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (!target) return;
+                event.preventDefault();
+                showView('resources');
+                setTimeout(function () {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    history.replaceState(null, '', '#' + targetId);
+                }, 30);
             });
         });
     }
