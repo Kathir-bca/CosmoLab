@@ -639,14 +639,15 @@
 
     function initResources() {
         const view = $('#view-resources');
-        const folder = $('[data-resource-folder="foundations"]', view);
-        const categories = $('#foundations-tree');
-        const origins = $('#origins-tree');
-        const fundamental = $('#fundamental-tree');
+        const folders = $all('[data-resource-folder]', view);
+        const trees = $all('.resource-tree', view);
 
         function hideTrees() {
-            [categories, origins, fundamental].forEach(function (tree) {
-                if (tree) tree.setAttribute('hidden', '');
+            trees.forEach(function (tree) { tree.setAttribute('hidden', ''); });
+            folders.forEach(function (folder) {
+                folder.classList.remove('is-open');
+                folder.setAttribute('aria-expanded', 'false');
+                folder.dataset.resourceOpen = 'false';
             });
         }
 
@@ -657,9 +658,14 @@
             });
         }
 
-        function showTree(tree) {
+        function showTree(tree, folder) {
             hideTrees();
             if (tree) tree.removeAttribute('hidden');
+            if (folder) {
+                folder.classList.add('is-open');
+                folder.setAttribute('aria-expanded', 'true');
+                folder.dataset.resourceOpen = 'true';
+            }
         }
 
         function openResource(resourceId) {
@@ -668,86 +674,48 @@
             closeAllResources();
             resource.removeAttribute('hidden');
             resource.classList.add('resource-visible');
-            setTimeout(function () {
-                resource.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 30);
+            setTimeout(function () { resource.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30);
             history.replaceState(null, '', '#' + resourceId);
         }
 
-        if (folder && categories) {
+        folders.forEach(function (folder) {
+            const id = folder.dataset.resourceFolder;
+            const tree = document.getElementById(id + '-tree');
             folder.dataset.resourceOpen = 'false';
             folder.setAttribute('aria-expanded', 'false');
+
+            if (!tree) {
+                folder.addEventListener('click', function (event) { event.preventDefault(); });
+                return;
+            }
 
             folder.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-
-                const isOpen = folder.dataset.resourceOpen === 'true';
-
                 closeAllResources();
-
+                const isOpen = folder.dataset.resourceOpen === 'true';
                 if (isOpen) {
-                    // OPEN → CLOSE
                     hideTrees();
-                    folder.dataset.resourceOpen = 'false';
-                    folder.classList.remove('is-open');
-                    folder.setAttribute('aria-expanded', 'false');
                 } else {
-                    // CLOSED → OPEN
-                    showTree(categories);
-                    folder.dataset.resourceOpen = 'true';
-                    folder.classList.add('is-open');
-                    folder.setAttribute('aria-expanded', 'true');
+                    showTree(tree, folder);
                 }
             });
-        }
+        });
 
-        // Use event delegation so category/back buttons remain clickable
-        // even if the resource view is re-rendered or the browser restores the view.
         view.addEventListener('click', function (event) {
-            const categoryButton = event.target.closest('[data-resource-category]');
-            if (categoryButton && view.contains(categoryButton)) {
-                event.preventDefault();
-                event.stopPropagation();
-                closeAllResources();
-
-                const category = categoryButton.dataset.resourceCategory;
-                if (category === 'origins') showTree(origins);
-                if (category === 'fundamental') showTree(fundamental);
-
-                folder.dataset.resourceOpen = 'true';
-                folder.classList.add('is-open');
-                folder.setAttribute('aria-expanded', 'true');
-                return;
-            }
-
             const libraryBack = event.target.closest('[data-resource-back="library"]');
             if (libraryBack && view.contains(libraryBack)) {
                 event.preventDefault();
                 event.stopPropagation();
                 closeAllResources();
                 hideTrees();
-                folder.dataset.resourceOpen = 'false';
-                folder.classList.remove('is-open');
-                folder.setAttribute('aria-expanded', 'false');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
-            }
-
-            const categoriesBack = event.target.closest('[data-resource-back="categories"]');
-            if (categoriesBack && view.contains(categoriesBack)) {
-                event.preventDefault();
-                event.stopPropagation();
-                closeAllResources();
-                showTree(categories);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
         $all('[data-resource-open]', view).forEach(function (button) {
-            button.addEventListener('click', function () {
-                openResource(button.dataset.resourceOpen);
-            });
+            button.addEventListener('click', function () { openResource(button.dataset.resourceOpen); });
         });
 
         $all('[data-resource-concept]', view).forEach(function (el) {
@@ -757,24 +725,16 @@
                 const resource = document.querySelector('[data-resource-key="' + id + '"]');
                 if (resource) {
                     const parentTree = resource.closest('.resource-tree');
-                    if (parentTree) showTree(parentTree);
+                    if (parentTree) {
+                        const folderId = parentTree.id.replace('-tree', '');
+                        const folder = document.querySelector('[data-resource-folder="' + folderId + '"]');
+                        showTree(parentTree, folder);
+                    }
                     openResource(resource.id);
                     return;
                 }
                 showView('explore');
                 setTimeout(function () { openConceptModal(id); }, 30);
-            });
-        });
-
-        $all('a[href^="#"][href$="-resource"]', view).forEach(function (el) {
-            el.addEventListener('click', function (event) {
-                const targetId = el.getAttribute('href').slice(1);
-                const target = document.getElementById(targetId);
-                if (!target) return;
-                event.preventDefault();
-                const parentTree = target.closest('.resource-tree');
-                if (parentTree) showTree(parentTree);
-                openResource(targetId);
             });
         });
 
