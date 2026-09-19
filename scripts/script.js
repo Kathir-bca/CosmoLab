@@ -566,7 +566,6 @@
     });
 
     function resumeView(id) {
-        if (id === 'blackhole') startBlackHoleLoop();
         if (id === 'cosmology') startExpansionLoop();
     }
 
@@ -936,129 +935,7 @@
         distSlider.addEventListener('input', update);
         update();
         buildKnowledgeGraph();
-        startBlackHoleLoop();
         if (window.initBlackHole3D) window.initBlackHole3D();
-    }
-    function startBlackHoleLoop() {
-        const canvas = document.getElementById('bhCanvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
-        function resizeCanvas() {
-          const currentDpr = window.devicePixelRatio || 1;
-          canvas.width = Math.max(1, Math.round(canvas.clientWidth * currentDpr));
-          canvas.height = 360 * currentDpr;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas, {passive:true});
-        const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        function frame() {
-            if (currentView !== 'blackhole') { return; }
-            const w = canvas.width, h = canvas.height, cx = w / 2, cy = h / 2;
-            ctx.clearRect(0, 0, w, h);
-            ctx.strokeStyle = 'rgba(120,140,200,0.18)';
-            const gridN = 14;
-            for (let i = 0; i <= gridN; i++) {
-                ctx.beginPath();
-                for (let x = 0; x <= w; x += 6) {
-                    const dx = x - cx, dy = (i / gridN) * h - cy;
-                    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const warp = Math.min(2200 * dpr / dist, 90 * dpr);
-                    const factor = 1 - Math.min(warp / (90 * dpr), 1) * 0.35;
-                    const px = cx + dx * factor;
-                    const py = cy + dy * factor;
-                    if (x === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-                }
-                ctx.stroke();
-            }
-            for (let i = 0; i <= gridN; i++) {
-                ctx.beginPath();
-                for (let y = 0; y <= h; y += 6) {
-                    const dx = (i / gridN) * w - cx, dy = y - cy;
-                    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-                    const warp = Math.min(2200 * dpr / dist, 90 * dpr);
-                    const factor = 1 - Math.min(warp / (90 * dpr), 1) * 0.35;
-                    const px = cx + dx * factor;
-                    const py = cy + dy * factor;
-                    if (y === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-                }
-                ctx.stroke();
-            }
-            const rsPix = 26 * dpr;
-            bhAngle += reduced ? 0 : 0.01;
-            for (let ring = 0; ring < 3; ring++) {
-                const rad = rsPix * (1.8 + ring * 0.5);
-                const grad = ctx.createRadialGradient(cx, cy, rad * 0.7, cx, cy, rad * 1.05);
-                grad.addColorStop(0, 'rgba(240,184,88,0)');
-                grad.addColorStop(0.6, 'rgba(240,140,88,0.5)');
-                grad.addColorStop(1, 'rgba(156,90,240,0)');
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(bhAngle * (ring % 2 === 0 ? 1 : -0.6));
-                ctx.scale(1, 0.34);
-                ctx.beginPath();
-                ctx.arc(0, 0, rad, 0, Math.PI * 2);
-                ctx.strokeStyle = grad;
-                ctx.lineWidth = 6 * dpr;
-                ctx.stroke();
-                ctx.restore();
-            }
-            ctx.beginPath();
-            ctx.setLineDash([4 * dpr, 4 * dpr]);
-            ctx.strokeStyle = 'rgba(200,210,255,0.4)';
-            ctx.arc(cx, cy, rsPix * 1.5, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.setLineDash([]);
-            ctx.beginPath();
-            ctx.fillStyle = '#05060a';
-            ctx.arc(cx, cy, rsPix, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = 'rgba(220,225,245,0.55)';
-            ctx.font = (11 * dpr) + 'px sans-serif';
-            ctx.fillText('event horizon', cx - rsPix, cy + rsPix + 16 * dpr);
-            ctx.fillText('photon sphere (1.5 rₛ)', cx - rsPix * 1.4, cy - rsPix * 1.6);
-            activeLoops.blackhole = requestAnimationFrame(frame);
-        }
-        frame();
-    }
-    function buildKnowledgeGraph() {
-        const svg = document.getElementById('knowledgeGraph');
-        const cx = 280, cy = 190, R = 140;
-        const nodes = [
-            { label: 'General relativity', to: 'general-relativity' },
-            { label: 'Event horizon', to: 'event-horizon' },
-            { label: 'Gravity', to: 'motion-energy' },
-            { label: 'Space-time', to: 'spacetime-curvature' },
-            { label: 'Gravitational lensing', to: 'glossary:Gravitational lensing' },
-            { label: 'Hawking radiation', to: 'glossary:Hawking radiation' },
-            { label: 'Gravitational waves', to: 'gravitational-waves' }
-        ];
-        let html = '';
-        nodes.forEach(function (n, i) {
-            const angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
-            const x = cx + R * Math.cos(angle), y = cy + R * Math.sin(angle);
-            html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x + '" y2="' + y + '" stroke="var(--border-strong)" stroke-width="1"/>';
-        });
-        html += '<circle cx="' + cx + '" cy="' + cy + '" r="46" fill="var(--violet-soft)" stroke="var(--violet)" stroke-width="1.5"/>';
-        html += '<text x="' + cx + '" y="' + cy + '" text-anchor="middle" dominant-baseline="middle" fill="var(--text)" font-size="13" font-family="var(--font-display)">Black hole</text>';
-        nodes.forEach(function (n, i) {
-            const angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
-            const x = cx + R * Math.cos(angle), y = cy + R * Math.sin(angle);
-            html += '<g class="kg-node" data-to="' + n.to + '" style="cursor:pointer;" tabindex="0" role="button" aria-label="' + n.label + '">' +
-                '<circle cx="' + x + '" cy="' + y + '" r="40" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.2"/>' +
-                '<text x="' + x + '" y="' + y + '" text-anchor="middle" dominant-baseline="middle" fill="var(--text)" font-size="10.5" font-family="var(--font-body)">' + wrapLabel(n.label, x) + '</text>' +
-                '</g>';
-        });
-        svg.innerHTML = html;
-        $all('.kg-node', svg).forEach(function (g) {
-            function go() {
-                const to = g.dataset.to;
-                if (to.indexOf('glossary:') === 0) { showView('glossary'); setTimeout(function () { $('#glossarySearch').value = to.split(':')[1]; filterGlossary(); }, 30); }
-                else { showView('explore'); setTimeout(function () { openConceptModal(to); }, 30); }
-            }
-            g.addEventListener('click', go);
-            g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
-        });
     }
     function wrapLabel(label, x) {
         const words = label.split(' ');
