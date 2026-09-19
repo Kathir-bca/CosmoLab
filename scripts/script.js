@@ -937,6 +937,7 @@
         update();
         buildKnowledgeGraph();
         startBlackHoleLoop();
+        if (window.initBlackHole3D) window.initBlackHole3D();
     }
     function startBlackHoleLoop() {
         const canvas = document.getElementById('bhCanvas');
