@@ -93,78 +93,51 @@
       </div>
 
       <div class="resource-library" id="resource-library">
-        <button class="resource-folder panel" type="button" data-resource-folder="foundations">
-          <span class="resource-folder-icon">🌌</span>
-          <span class="resource-folder-copy">
-            <span class="meta">Resources</span>
-            <strong>Foundations of the Universe</strong>
-            <span>Explore the fundamental ideas that describe the universe's origin and early evolution.</span>
-          </span>
-          <span class="resource-folder-arrow" aria-hidden="true">›</span>
-        </button>
-
-        <div class="resource-tree" id="foundations-tree" hidden>
-          <div class="resource-tree-head">
-            <div>
-              <span class="meta">Foundations of the Universe</span>
-              <h3>Explore the foundations</h3>
-              <p>Choose a category to explore its concepts.</p>
+        <div class="resource-collections" aria-label="Physics resource collections">
+          <button class="resource-folder panel" type="button" data-resource-folder="fundamentals">
+            <span class="resource-folder-icon">🧩</span><span class="resource-folder-copy"><span class="meta">01</span><strong>Fundamentals of Physics</strong><span>Matter, energy, motion, forces, gravity, space, time, light and spacetime.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span>
+          </button>
+          <div class="resource-tree" id="fundamentals-tree" hidden>
+            <div class="resource-tree-head"><div><span class="meta">01. Fundamentals of Physics</span><h3>Fundamentals of Physics</h3><p>Select a concept to explore its complete resource.</p></div><button class="btn btn-ghost" type="button" data-resource-back="library">← Back</button></div>
+            <div class="resource-concepts" role="list" aria-label="Fundamentals of Physics concepts">
+              <button class="resource-concept-card panel" type="button" data-resource-open="matter-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🧱</span><span><strong>Matter</strong><small>Atoms, particles and quantum fields</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="energy-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">⚡</span><span><strong>Energy</strong><small>Conservation, transfer and transformation</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="motion-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">🚀</span><span><strong>Motion</strong><small>Position, velocity, acceleration and forces</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="forces-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">🧲</span><span><strong>Forces</strong><small>Interactions, net force and Newton's laws</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="gravity-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">🌍</span><span><strong>Gravity</strong><small>Mass-energy and spacetime geometry</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="space-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">📏</span><span><strong>Space</strong><small>Distance, geometry and physical extent</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="time-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">⏳</span><span><strong>Time</strong><small>Duration, causality and the arrow of time</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="light-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">💡</span><span><strong>Light</strong><small>Electromagnetic radiation and photons</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="spacetime-resource" role="listitem"><span class="resource-number">09</span><span class="resource-concept-icon">🌌</span><span><strong>Spacetime</strong><small>Unified geometry of space and time</small></span></button>
             </div>
-            <button class="btn btn-ghost" type="button" data-resource-back="library">← Back</button>
           </div>
-
-          <div class="resource-concepts resource-category-list" role="list" aria-label="Foundations categories">
-            <button class="resource-concept-card panel" type="button" data-resource-category="origins" role="listitem">
-              <span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>01. Origins of the Universe</strong><small>Big Bang, inflation, expansion, first stars and cosmic history</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-category="fundamental" role="listitem">
-              <span class="resource-number">02</span><span class="resource-concept-icon">🧩</span><span><strong>Fundamental Concepts</strong><small>Gravity, time, space, light, energy, matter, motion and spacetime</small></span>
-            </button>
-          </div>
-        </div>
-
-        <div class="resource-tree resource-subtree" id="origins-tree" hidden>
-          <div class="resource-tree-head">
-            <div>
-              <span class="meta">Foundations of the Universe</span>
-              <h3>01. Origins of the Universe</h3>
-              <p>Select a concept to render its complete resource.</p>
+          <button class="resource-folder panel" type="button" data-resource-folder="origins">
+            <span class="resource-folder-icon">🌌</span><span class="resource-folder-copy"><span class="meta">02</span><strong>Origins of the Universe</strong><span>Big Bang, inflation, expansion, first stars, galaxies and cosmic history.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span>
+          </button>
+          <div class="resource-tree" id="origins-tree" hidden>
+            <div class="resource-tree-head"><div><span class="meta">02. Origins of the Universe</span><h3>Origins of the Universe</h3><p>Select a concept to explore its complete resource.</p></div><button class="btn btn-ghost" type="button" data-resource-back="library">← Back</button></div>
+            <div class="resource-concepts" role="list" aria-label="Origins of the Universe concepts">
+              <button class="resource-concept-card panel" type="button" data-resource-open="big-bang-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Big Bang</strong><small>Hot, dense early universe</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="inflation-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">💨</span><span><strong>Cosmic Inflation</strong><small>Early accelerated expansion</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="expansion-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">🌠</span><span><strong>Expansion of the Universe</strong><small>Growing cosmic distances</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="nucleosynthesis-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">⚛️</span><span><strong>Big Bang Nucleosynthesis</strong><small>Formation of light nuclei</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="cmb-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">📡</span><span><strong>Cosmic Microwave Background</strong><small>Oldest observable light</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="first-stars-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">⭐</span><span><strong>Formation of the First Stars</strong><small>Cosmic dawn and first stellar light</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="galaxies-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">🌌</span><span><strong>Formation of Galaxies</strong><small>Growth of cosmic structure and early galaxies</small></span></button>
+              <button class="resource-concept-card panel" type="button" data-resource-open="dark-energy-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">🌑</span><span><strong>Dark Energy</strong><small>Accelerated cosmic expansion</small></span></button>
             </div>
-            <button class="btn btn-ghost" type="button" data-resource-back="categories">← Back</button>
           </div>
-          <div class="resource-concepts" role="list" aria-label="Origins of the Universe concepts">
-            <button class="resource-concept-card panel" type="button" data-resource-open="big-bang-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Big Bang</strong><small>Hot, dense early universe</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="inflation-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">💨</span><span><strong>Cosmic Inflation</strong><small>Early accelerated expansion</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="expansion-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">🌠</span><span><strong>Expansion of Space</strong><small>Growing cosmic distances</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="nucleosynthesis-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">⚛️</span><span><strong>Big Bang Nucleosynthesis</strong><small>Formation of light nuclei</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="cmb-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">📡</span><span><strong>Cosmic Microwave Background</strong><small>Oldest observable light</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="dark-energy-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">🌑</span><span><strong>Dark Energy</strong><small>Accelerated cosmic expansion</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="first-stars-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">⭐</span><span><strong>Formation of the First Stars</strong><small>Cosmic dawn and the first stellar light</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="galaxies-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">🌌</span><span><strong>Formation of Galaxies</strong><small>Growth of cosmic structure and early galaxies</small></span></button>
-          </div>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="solar-system" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">03</span><strong>Space & the Universe</strong><span>Solar System, stars, galaxies and large-scale structure.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="black-holes" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">04</span><strong>Black Holes</strong><span>Event horizons, singularities, accretion disks and black-hole physics.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="relativity" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">05</span><strong>Relativity</strong><span>Special and general relativity, spacetime and gravitational waves.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="light-em" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">06</span><strong>Light & Electromagnetism</strong><span>Electromagnetic waves, photons, spectrum and optical phenomena.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="quantum" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">07</span><strong>Quantum Physics</strong><span>Quantum mechanics, superposition, uncertainty, entanglement and fields.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="particles" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">08</span><strong>Particles & Matter</strong><span>Atoms, quarks, leptons, bosons, Higgs and the Standard Model.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="cosmology" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">09</span><strong>Cosmology</strong><span>Observable universe, Hubble expansion, dark matter, dark energy and cosmic fate.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="extreme" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">10</span><strong>Extreme Physics</strong><span>Neutron stars, pulsars, magnetars, supernovae and extreme conditions.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="open-questions" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">11</span><strong>Open Questions</strong><span>Quantum gravity, dark matter, dark energy and unresolved foundations.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
+<button class="resource-folder panel resource-folder-placeholder" type="button" data-resource-folder="experiments" aria-disabled="true"><span class="resource-folder-icon">◈</span><span class="resource-folder-copy"><span class="meta">12</span><strong>Experiments & Evidence</strong><span>Experiments and observations that established modern physical theories.</span></span><span class="resource-folder-arrow" aria-hidden="true">›</span></button>
         </div>
-
-        <div class="resource-tree resource-subtree" id="fundamental-tree" hidden>
-          <div class="resource-tree-head">
-            <div>
-              <span class="meta">Foundations of the Universe</span>
-              <h3>02. Fundamental Concepts</h3>
-              <p>Select a concept to render its complete resource.</p>
-            </div>
-            <button class="btn btn-ghost" type="button" data-resource-back="categories">← Back</button>
-          </div>
-          <div class="resource-concepts" role="list" aria-label="Fundamental Concepts">
-            <button class="resource-concept-card panel" type="button" data-resource-open="gravity-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌍</span><span><strong>Gravity</strong><small>Mass-energy and spacetime geometry</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="time-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">⏳</span><span><strong>Time</strong><small>Duration, causality and the arrow of time</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="space-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">📏</span><span><strong>Space</strong><small>Distance, geometry and physical extent</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="light-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">💡</span><span><strong>Light</strong><small>Electromagnetic radiation and photons</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="energy-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">⚡</span><span><strong>Energy</strong><small>Conservation, transfer and transformation</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="matter-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">🧱</span><span><strong>Matter</strong><small>Atoms, particles and quantum fields</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="motion-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">🚀</span><span><strong>Motion</strong><small>Position, velocity, acceleration and forces</small></span></button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="spacetime-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">🌌</span><span><strong>Spacetime</strong><small>Unified geometry of space and time</small></span></button>
-          </div>
-        </div>
-
       </div>
 
 
