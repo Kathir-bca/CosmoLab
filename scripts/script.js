@@ -702,31 +702,46 @@
             });
         }
 
-        $all('[data-resource-category]', view).forEach(function (button) {
-            button.addEventListener('click', function () {
+        // Use event delegation so category/back buttons remain clickable
+        // even if the resource view is re-rendered or the browser restores the view.
+        view.addEventListener('click', function (event) {
+            const categoryButton = event.target.closest('[data-resource-category]');
+            if (categoryButton && view.contains(categoryButton)) {
+                event.preventDefault();
+                event.stopPropagation();
                 closeAllResources();
-                const category = button.dataset.resourceCategory;
+
+                const category = categoryButton.dataset.resourceCategory;
                 if (category === 'origins') showTree(origins);
                 if (category === 'fundamental') showTree(fundamental);
-            });
-        });
 
-        $all('[data-resource-back="categories"]', view).forEach(function (button) {
-            button.addEventListener('click', function () {
-                closeAllResources();
-                showTree(categories);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
+                folder.dataset.resourceOpen = 'true';
+                folder.classList.add('is-open');
+                folder.setAttribute('aria-expanded', 'true');
+                return;
+            }
 
-        $all('[data-resource-back="library"]', view).forEach(function (button) {
-            button.addEventListener('click', function () {
+            const libraryBack = event.target.closest('[data-resource-back="library"]');
+            if (libraryBack && view.contains(libraryBack)) {
+                event.preventDefault();
+                event.stopPropagation();
                 closeAllResources();
                 hideTrees();
+                folder.dataset.resourceOpen = 'false';
                 folder.classList.remove('is-open');
                 folder.setAttribute('aria-expanded', 'false');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+                return;
+            }
+
+            const categoriesBack = event.target.closest('[data-resource-back="categories"]');
+            if (categoriesBack && view.contains(categoriesBack)) {
+                event.preventDefault();
+                event.stopPropagation();
+                closeAllResources();
+                showTree(categories);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         });
 
         $all('[data-resource-open]', view).forEach(function (button) {
