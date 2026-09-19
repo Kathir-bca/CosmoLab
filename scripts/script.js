@@ -640,13 +640,26 @@
     function initResources() {
         const view = $('#view-resources');
         const folder = $('[data-resource-folder="foundations"]', view);
-        const tree = $('#foundations-tree');
+        const categories = $('#foundations-tree');
+        const origins = $('#origins-tree');
+        const fundamental = $('#fundamental-tree');
+
+        function hideTrees() {
+            [categories, origins, fundamental].forEach(function (tree) {
+                if (tree) tree.setAttribute('hidden', '');
+            });
+        }
 
         function closeAllResources() {
             $all('.resource-article', view).forEach(function (article) {
                 article.classList.remove('resource-visible');
                 article.setAttribute('hidden', '');
             });
+        }
+
+        function showTree(tree) {
+            hideTrees();
+            if (tree) tree.removeAttribute('hidden');
         }
 
         function openResource(resourceId) {
@@ -661,21 +674,47 @@
             history.replaceState(null, '', '#' + resourceId);
         }
 
-        if (folder && tree) {
+        if (folder && categories) {
             folder.addEventListener('click', function () {
-                const expanded = !tree.hasAttribute('hidden');
-                tree.toggleAttribute('hidden', expanded);
-                folder.setAttribute('aria-expanded', String(!expanded));
-                folder.classList.toggle('is-open', !expanded);
-                if (!expanded) closeAllResources();
+                const opening = categories.hasAttribute('hidden') &&
+                    origins.hasAttribute('hidden') &&
+                    fundamental.hasAttribute('hidden');
+
+                closeAllResources();
+                if (opening) {
+                    showTree(categories);
+                    folder.classList.add('is-open');
+                    folder.setAttribute('aria-expanded', 'true');
+                } else {
+                    hideTrees();
+                    folder.classList.remove('is-open');
+                    folder.setAttribute('aria-expanded', 'false');
+                }
             });
             folder.setAttribute('aria-expanded', 'false');
         }
 
-        $all('[data-resource-back="foundations"]', view).forEach(function (button) {
+        $all('[data-resource-category]', view).forEach(function (button) {
             button.addEventListener('click', function () {
                 closeAllResources();
-                tree.setAttribute('hidden', '');
+                const category = button.dataset.resourceCategory;
+                if (category === 'origins') showTree(origins);
+                if (category === 'fundamental') showTree(fundamental);
+            });
+        });
+
+        $all('[data-resource-back="categories"]', view).forEach(function (button) {
+            button.addEventListener('click', function () {
+                closeAllResources();
+                showTree(categories);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        $all('[data-resource-back="library"]', view).forEach(function (button) {
+            button.addEventListener('click', function () {
+                closeAllResources();
+                hideTrees();
                 folder.classList.remove('is-open');
                 folder.setAttribute('aria-expanded', 'false');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -694,11 +733,8 @@
                 const id = el.dataset.resourceConcept;
                 const resource = document.querySelector('[data-resource-key="' + id + '"]');
                 if (resource) {
-                    if (tree.hasAttribute('hidden')) {
-                        tree.removeAttribute('hidden');
-                        folder.classList.add('is-open');
-                        folder.setAttribute('aria-expanded', 'true');
-                    }
+                    const parentTree = resource.closest('.resource-tree');
+                    if (parentTree) showTree(parentTree);
                     openResource(resource.id);
                     return;
                 }
@@ -713,15 +749,13 @@
                 const target = document.getElementById(targetId);
                 if (!target) return;
                 event.preventDefault();
-                if (tree.hasAttribute('hidden')) {
-                    tree.removeAttribute('hidden');
-                    folder.classList.add('is-open');
-                    folder.setAttribute('aria-expanded', 'true');
-                }
+                const parentTree = target.closest('.resource-tree');
+                if (parentTree) showTree(parentTree);
                 openResource(targetId);
             });
         });
 
+        hideTrees();
         closeAllResources();
     }
     /* ============ STARFIELD (home hero) ============ */
