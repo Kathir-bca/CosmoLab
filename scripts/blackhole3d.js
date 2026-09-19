@@ -12,6 +12,19 @@
   "use strict";
 
   let state = null;
+  let threePromise = null;
+  const THREE_CDN = "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
+
+  function loadThree() {
+    if (!threePromise) {
+      threePromise = import(THREE_CDN);
+    }
+    return threePromise;
+  }
+
+  function showFallback(host, message) {
+    host.innerHTML = '<div class="bh3d-fallback" role="status">' + message + '</div>';
+  }
 
   function makeLabel(container, text, className) {
     const el = document.createElement("div");
@@ -21,17 +34,27 @@
     return el;
   }
 
-  function initBlackHole3D() {
+  async function initBlackHole3D() {
     const host = document.getElementById("bh3d");
-    if (!host || !window.THREE || state) return;
+    if (!host || state || host.dataset.bh3dLoading === "true") return;
 
-    if (!window.WebGLRenderingContext) {
-      host.innerHTML = '<div class="bh3d-fallback">WebGL is not available on this device.</div>';
-      return;
-    }
+    host.dataset.bh3dLoading = "true";
+    host.innerHTML = '<div class="bh3d-fallback" role="status">Loading 3D black-hole laboratory…</div>';
 
-    const THREE = window.THREE;
-    host.innerHTML = "";
+    try {
+      const THREE = await loadThree();
+
+      if (!window.WebGLRenderingContext) {
+        throw new Error("WebGL is not available.");
+      }
+
+      const testCanvas = document.createElement("canvas");
+      const gl = testCanvas.getContext("webgl2");
+      if (!gl) {
+        throw new Error("WebGL 2 is not available.");
+      }
+
+      host.innerHTML = "";
     host.style.position = "relative";
     host.style.overflow = "hidden";
     host.style.touchAction = "none";
@@ -40,11 +63,17 @@
     scene.background = new THREE.Color(0x05070d);
 
     const camera = new THREE.PerspectiveCamera(42, 1, 0.05, 180);
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: false,
-      powerPreference: "high-performance"
-    });
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false,
+        powerPreference: "high-performance"
+      });
+    } catch (error) {
+      console.error("CosmoLab Black Hole Lab: renderer initialization failed.", error);
+      throw new Error("The browser could not create a WebGL 2 renderer.");
+    }
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x05070d, 1);
@@ -350,6 +379,11 @@
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
+    const resizeObserver = "ResizeObserver" in window
+      ? new ResizeObserver(resize)
+      : null;
+    resizeObserver?.observe(host);
+
     renderer.domElement.addEventListener("pointerdown", function (e) {
       dragging = true;
       lastX = e.clientX;
@@ -457,8 +491,24 @@
 
     animate();
 
-    state = { renderer, scene };
+    state = { renderer, scene, resizeObserver };
+
+    delete host.dataset.bh3dLoading;
+  } catch (error) {
+    console.error("CosmoLab Black Hole Lab: 3D initialization failed.", error);
+    delete host.dataset.bh3dLoading;
+    showFallback(
+      host,
+      "The 3D laboratory could not start. Check WebGL support or your network connection."
+    );
+  }
   }
 
   window.initBlackHole3D = initBlackHole3D;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBlackHole3D, { once: true });
+  } else {
+    initBlackHole3D();
+  }
 })();
