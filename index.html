@@ -107,54 +107,62 @@
           <div class="resource-tree-head">
             <div>
               <span class="meta">Foundations of the Universe</span>
+              <h3>Explore the foundations</h3>
+              <p>Choose a category to explore its concepts.</p>
+            </div>
+            <button class="btn btn-ghost" type="button" data-resource-back="library">← Back</button>
+          </div>
+
+          <div class="resource-concepts resource-category-list" role="list" aria-label="Foundations categories">
+            <button class="resource-concept-card panel" type="button" data-resource-category="origins" role="listitem">
+              <span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Origins of the Universe</strong><small>Big Bang, inflation, expansion and cosmic history</small></span>
+            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-category="fundamental" role="listitem">
+              <span class="resource-number">02</span><span class="resource-concept-icon">🧩</span><span><strong>Fundamental Concepts</strong><small>Gravity, time, space, light, energy, matter, motion and spacetime</small></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="resource-tree resource-subtree" id="origins-tree" hidden>
+          <div class="resource-tree-head">
+            <div>
+              <span class="meta">Foundations of the Universe</span>
               <h3>01. Origins of the Universe</h3>
-              <p>Select a concept to render its complete resource. Only one concept is shown at a time.</p>
+              <p>Select a concept to render its complete resource.</p>
             </div>
-            <button class="btn btn-ghost" type="button" data-resource-back="foundations">← Back</button>
+            <button class="btn btn-ghost" type="button" data-resource-back="categories">← Back</button>
           </div>
-
           <div class="resource-concepts" role="list" aria-label="Origins of the Universe concepts">
-            <button class="resource-concept-card panel" type="button" data-resource-open="big-bang-resource" role="listitem">
-              <span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Big Bang</strong><small>Hot, dense early universe</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="inflation-resource" role="listitem">
-              <span class="resource-number">02</span><span class="resource-concept-icon">💨</span><span><strong>Cosmic Inflation</strong><small>Early accelerated expansion</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="expansion-resource" role="listitem">
-              <span class="resource-number">03</span><span class="resource-concept-icon">🌠</span><span><strong>Expansion of Space</strong><small>Growing cosmic distances</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="nucleosynthesis-resource" role="listitem">
-              <span class="resource-number">04</span><span class="resource-concept-icon">⚛️</span><span><strong>Big Bang Nucleosynthesis</strong><small>Formation of light nuclei</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="cmb-resource" role="listitem">
-              <span class="resource-number">05</span><span class="resource-concept-icon">📡</span><span><strong>Cosmic Microwave Background</strong><small>Oldest observable light</small></span>
-            </button>
-            <button class="resource-concept-card panel" type="button" data-resource-open="dark-energy-resource" role="listitem">
-              <span class="resource-number">06</span><span class="resource-concept-icon">🌑</span><span><strong>Dark Energy</strong><small>Accelerated cosmic expansion</small></span>
-            </button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="big-bang-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌌</span><span><strong>Big Bang</strong><small>Hot, dense early universe</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="inflation-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">💨</span><span><strong>Cosmic Inflation</strong><small>Early accelerated expansion</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="expansion-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">🌠</span><span><strong>Expansion of Space</strong><small>Growing cosmic distances</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="nucleosynthesis-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">⚛️</span><span><strong>Big Bang Nucleosynthesis</strong><small>Formation of light nuclei</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="cmb-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">📡</span><span><strong>Cosmic Microwave Background</strong><small>Oldest observable light</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="dark-energy-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">🌑</span><span><strong>Dark Energy</strong><small>Accelerated cosmic expansion</small></span></button>
           </div>
         </div>
 
-        <div class="resource-tree" id="fundamental-tree">
-            <div class="resource-tree-head">
-              <div>
-                <span class="meta">Foundations of the Universe</span>
-                <h3>02. Fundamental Concepts</h3>
-                <p>Explore the core ideas that connect classical physics, quantum physics and relativity.</p>
-              </div>
-              <button class="btn btn-ghost" type="button" data-resource-back="foundations">← Back</button>
+        <div class="resource-tree resource-subtree" id="fundamental-tree" hidden>
+          <div class="resource-tree-head">
+            <div>
+              <span class="meta">Foundations of the Universe</span>
+              <h3>02. Fundamental Concepts</h3>
+              <p>Select a concept to render its complete resource.</p>
             </div>
-            <div class="resource-concepts" role="list" aria-label="Fundamental Concepts">
-              <button class="resource-concept-card panel" type="button" data-resource-open="gravity-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌍</span><span><strong>Gravity</strong><small>Mass-energy and spacetime geometry</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="time-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">⏳</span><span><strong>Time</strong><small>Duration, causality and the arrow of time</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="space-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">📏</span><span><strong>Space</strong><small>Distance, geometry and physical extent</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="light-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">💡</span><span><strong>Light</strong><small>Electromagnetic radiation and photons</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="energy-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">⚡</span><span><strong>Energy</strong><small>Conservation, transfer and transformation</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="matter-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">🧱</span><span><strong>Matter</strong><small>Atoms, particles and quantum fields</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="motion-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">🚀</span><span><strong>Motion</strong><small>Position, velocity, acceleration and forces</small></span></button>
-              <button class="resource-concept-card panel" type="button" data-resource-open="spacetime-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">🌌</span><span><strong>Spacetime</strong><small>Unified geometry of space and time</small></span></button>
-            </div>
+            <button class="btn btn-ghost" type="button" data-resource-back="categories">← Back</button>
+          </div>
+          <div class="resource-concepts" role="list" aria-label="Fundamental Concepts">
+            <button class="resource-concept-card panel" type="button" data-resource-open="gravity-resource" role="listitem"><span class="resource-number">01</span><span class="resource-concept-icon">🌍</span><span><strong>Gravity</strong><small>Mass-energy and spacetime geometry</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="time-resource" role="listitem"><span class="resource-number">02</span><span class="resource-concept-icon">⏳</span><span><strong>Time</strong><small>Duration, causality and the arrow of time</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="space-resource" role="listitem"><span class="resource-number">03</span><span class="resource-concept-icon">📏</span><span><strong>Space</strong><small>Distance, geometry and physical extent</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="light-resource" role="listitem"><span class="resource-number">04</span><span class="resource-concept-icon">💡</span><span><strong>Light</strong><small>Electromagnetic radiation and photons</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="energy-resource" role="listitem"><span class="resource-number">05</span><span class="resource-concept-icon">⚡</span><span><strong>Energy</strong><small>Conservation, transfer and transformation</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="matter-resource" role="listitem"><span class="resource-number">06</span><span class="resource-concept-icon">🧱</span><span><strong>Matter</strong><small>Atoms, particles and quantum fields</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="motion-resource" role="listitem"><span class="resource-number">07</span><span class="resource-concept-icon">🚀</span><span><strong>Motion</strong><small>Position, velocity, acceleration and forces</small></span></button>
+            <button class="resource-concept-card panel" type="button" data-resource-open="spacetime-resource" role="listitem"><span class="resource-number">08</span><span class="resource-concept-icon">🌌</span><span><strong>Spacetime</strong><small>Unified geometry of space and time</small></span></button>
+          </div>
         </div>
+
       </div>
 
 <article class="panel resource-article" id="time-resource" hidden data-resource-key="time" data-resource-title="Time" data-resource-keywords="Time physics time fundamental concept">
