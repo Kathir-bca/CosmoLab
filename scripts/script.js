@@ -675,23 +675,31 @@
         }
 
         if (folder && categories) {
-            folder.addEventListener('click', function () {
-                const opening = categories.hasAttribute('hidden') &&
-                    origins.hasAttribute('hidden') &&
-                    fundamental.hasAttribute('hidden');
+            folder.dataset.resourceOpen = 'false';
+            folder.setAttribute('aria-expanded', 'false');
+
+            folder.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const isOpen = folder.dataset.resourceOpen === 'true';
 
                 closeAllResources();
-                if (opening) {
-                    showTree(categories);
-                    folder.classList.add('is-open');
-                    folder.setAttribute('aria-expanded', 'true');
-                } else {
+
+                if (isOpen) {
+                    // OPEN → CLOSE
                     hideTrees();
+                    folder.dataset.resourceOpen = 'false';
                     folder.classList.remove('is-open');
                     folder.setAttribute('aria-expanded', 'false');
+                } else {
+                    // CLOSED → OPEN
+                    showTree(categories);
+                    folder.dataset.resourceOpen = 'true';
+                    folder.classList.add('is-open');
+                    folder.setAttribute('aria-expanded', 'true');
                 }
             });
-            folder.setAttribute('aria-expanded', 'false');
         }
 
         $all('[data-resource-category]', view).forEach(function (button) {
