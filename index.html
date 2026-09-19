@@ -1089,8 +1089,8 @@
             the full Einstein field equations.</p>
         </div>
         <div class="panel lab-panel">
-          <canvas id="bhCanvas" height="360" role="img"
-            aria-label="Illustration of a black hole with event horizon, photon sphere, accretion disk and warped background grid representing gravitational lensing"></canvas>
+          <div id="bh3d" class="bh3d" role="img"
+            aria-label="Interactive 3D visualization of a Schwarzschild black hole with event horizon, photon sphere, accretion disk, curved spacetime grid and bent light rays"></div>
         </div>
       </div>
 
@@ -1309,6 +1309,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.min.js"></script>
+  <script src="scripts/blackhole3d.js"></script>
   <script src="scripts/script.js"></script>
 </body>
 
